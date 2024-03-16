@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
-import com.example.flixster.R
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -80,9 +77,9 @@ class CurrentMoviesFragment : Fragment() {
                         // The wait for a response is over
                         progressBar.hide()
 
-                        //TODO - Parse JSON into Models
-                        val resultsJSON : JSONObject = json.jsonObject.get("results") as JSONObject
-                        val moviesRawJSON : String = resultsJSON.get("movies").toString()
+                        //Parse JSON into Models
+                        val resultsJSON : JSONArray = json.jsonObject.getJSONArray("results")
+                        val moviesRawJSON : String = resultsJSON.toString()
                         val gson = Gson()
                         val arrayMovieType = object : TypeToken<List<CurrentMovie>>() {}.type
 

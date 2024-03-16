@@ -15,11 +15,11 @@ class CurrentMovie {
     var title: String? = null
 
 
-    @SerializedName("movie_image")
+    @SerializedName("poster_path")
     var movieImageUrl: String? = null
 
 
-    @SerializedName("description")
+    @SerializedName("overview")
     var description: String? = null
 
 }

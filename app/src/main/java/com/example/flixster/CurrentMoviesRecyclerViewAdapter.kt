@@ -45,8 +45,10 @@ class CurrentMoviesRecyclerViewAdapter (private val movies: List<CurrentMovie>)
         holder.mMovieTitle.text = movie.title
         holder.mMovieDescription.text = movie.description
 
+        val fullImageUrl = "https://image.tmdb.org/t/p/w500/" + movie.movieImageUrl
+
         Glide.with(holder.mView)
-            .load(movie.movieImageUrl)
+            .load(fullImageUrl)
             .centerInside()
             .into(holder.mMovieImage)
     }
