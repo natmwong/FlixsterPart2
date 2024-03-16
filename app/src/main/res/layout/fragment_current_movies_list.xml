@@ -7,7 +7,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:name="com.codepath.flixsterapp.CurrentMoviesFragment"
+        android:name="com.example.flixster.CurrentMoviesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
