@@ -28,10 +28,12 @@
 
     <TextView
         android:id="@+id/movie_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="232dp"
+        android:layout_height="100dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:ellipsize="end"
+        android:lines="6"
         android:text="Description"
         app:layout_constraintStart_toEndOf="@+id/movie_image"
         app:layout_constraintTop_toBottomOf="@+id/movie_title" />
