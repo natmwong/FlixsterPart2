@@ -1,4 +1,4 @@
-package com.example.flixster
+package com.example.flixsterpart2
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName
  * SerializedName tags MUST match the JSON response for the
  * object to correctly parse with the gson library.
  */
-class CurrentMovie {
+class PopularShow {
 
     @JvmField
-    @SerializedName("title")
+    @SerializedName("name")
     var title: String? = null
 
 
     @SerializedName("poster_path")
-    var movieImageUrl: String? = null
+    var showImageUrl: String? = null
 
 
     @SerializedName("overview")

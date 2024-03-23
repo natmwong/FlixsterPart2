@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.flixster'
+    namespace 'com.example.flixsterpart2'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.flixster"
+        applicationId "com.example.flixsterpart2"
         minSdk 24
         targetSdk 34
         versionCode 1

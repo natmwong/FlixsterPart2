@@ -1,12 +1,12 @@
-package com.example.flixster
+package com.example.flixsterpart2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.flixster.R.id
+import com.example.flixsterpart2.R.id
 
 /**
- * The MainActivity for the BestSellerList app.
- * Launches a [CurrentMoviesFragment].
+ * The MainActivity for the FlixsterPart2 app.
+ * Launches a [PopularShowsFragment].
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val supportFragmentManager = supportFragmentManager
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.content, CurrentMoviesFragment(), null).commit()
+        fragmentTransaction.replace(id.content, PopularShowsFragment(), null).commit()
     }
 }

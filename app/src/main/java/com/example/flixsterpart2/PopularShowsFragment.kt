@@ -1,4 +1,4 @@
-package com.example.flixster
+package com.example.flixsterpart2
 
 import android.os.Bundle
 import android.util.Log
@@ -27,7 +27,7 @@ private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
  * The class for the only fragment in the app, which contains the progress bar,
  * recyclerView, and performs the network calls to the Movie Database API.
  */
-class CurrentMoviesFragment : Fragment() {
+class PopularShowsFragment : Fragment() {
 
     /*
      * Constructing the view
@@ -59,7 +59,7 @@ class CurrentMoviesFragment : Fragment() {
 
         // Using the client, perform the HTTP request
         client[
-                "https://api.themoviedb.org/3/movie/now_playing",
+                "https://api.themoviedb.org/3/tv/popular",
                 params,
                 object : JsonHttpResponseHandler()
 
@@ -80,14 +80,14 @@ class CurrentMoviesFragment : Fragment() {
                         val resultsJSON : JSONArray = json.jsonObject.getJSONArray("results")
                         val moviesRawJSON : String = resultsJSON.toString()
                         val gson = Gson()
-                        val arrayMovieType = object : TypeToken<List<CurrentMovie>>() {}.type
+                        val arrayMovieType = object : TypeToken<List<PopularShow>>() {}.type
 
 
-                        val models : List<CurrentMovie> = gson.fromJson(moviesRawJSON, arrayMovieType)
-                        recyclerView.adapter = CurrentMoviesRecyclerViewAdapter(models)
+                        val models : List<PopularShow> = gson.fromJson(moviesRawJSON, arrayMovieType)
+                        recyclerView.adapter = PopularShowsRecyclerViewAdapter(models)
 
                         // Look for this in Logcat:
-                        Log.d("CurrentMoviesFragment", "response successful")
+                        Log.d("PopularShowsFragment", "response successful")
                     }
 
                     /*
@@ -105,7 +105,7 @@ class CurrentMoviesFragment : Fragment() {
 
                         // If the error is not null, log it!
                         t?.message?.let {
-                            Log.e("CurrentMoviesFragment", errorResponse)
+                            Log.e("PopularShowsFragment", errorResponse)
                         }
                     }
                 }]

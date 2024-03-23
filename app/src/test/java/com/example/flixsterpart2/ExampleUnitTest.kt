@@ -1,4 +1,4 @@
-package com.example.flixster
+package com.example.flixsterpart2
 
 import org.junit.Test
 

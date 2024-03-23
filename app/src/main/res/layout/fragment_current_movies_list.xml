@@ -7,14 +7,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:name="com.example.flixster.CurrentMoviesFragment"
+        android:name="com.example.flixsterpart2.PopularShowsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".BestSellerBooksFragment"
-        tools:listitem="@layout/fragment_current_movie" />
+        tools:context=".PopularShowsFragment"
+        tools:listitem="@layout/fragment_popular_show" />
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
