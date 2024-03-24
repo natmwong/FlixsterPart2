@@ -1,5 +1,6 @@
 package com.example.flixsterpart2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,11 +24,13 @@ import org.json.JSONArray
 // --------------------------------//
 private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
+const val SHOW_EXTRA = "SHOW_EXTRA"
+
 /*
  * The class for the only fragment in the app, which contains the progress bar,
  * recyclerView, and performs the network calls to the Movie Database API.
  */
-class PopularShowsFragment : Fragment() {
+class PopularShowsFragment : Fragment(), OnListInteractionListener {
 
     /*
      * Constructing the view
@@ -36,7 +39,7 @@ class PopularShowsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_current_movies_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_popular_shows_list, container, false)
         val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
         val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
         val context = view.context
@@ -78,13 +81,13 @@ class PopularShowsFragment : Fragment() {
 
                         //Parse JSON into Models
                         val resultsJSON : JSONArray = json.jsonObject.getJSONArray("results")
-                        val moviesRawJSON : String = resultsJSON.toString()
+                        val showsRawJSON : String = resultsJSON.toString()
                         val gson = Gson()
-                        val arrayMovieType = object : TypeToken<List<PopularShow>>() {}.type
+                        val arrayShowType = object : TypeToken<List<PopularShow>>() {}.type
 
 
-                        val models : List<PopularShow> = gson.fromJson(moviesRawJSON, arrayMovieType)
-                        recyclerView.adapter = PopularShowsRecyclerViewAdapter(models)
+                        val models : List<PopularShow> = gson.fromJson(showsRawJSON, arrayShowType)
+                        recyclerView.adapter = PopularShowsRecyclerViewAdapter(models, this@PopularShowsFragment)
 
                         // Look for this in Logcat:
                         Log.d("PopularShowsFragment", "response successful")
@@ -109,5 +112,14 @@ class PopularShowsFragment : Fragment() {
                         }
                     }
                 }]
+    }
+
+    override fun onItemClick(item: PopularShow) {
+        Log.d("PopularShowsFragment", "originCountry: ${item.origin}")
+
+        // Navigate to Details screen and pass selected article
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra(SHOW_EXTRA, item)
+        context?.startActivity(intent)
     }
 }

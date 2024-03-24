@@ -1,5 +1,6 @@
 package com.example.flixsterpart2
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,8 @@ import com.example.flixsterpart2.R.id
 /**
  * [RecyclerView.Adapter] that can display a [PopularShow]
  */
-class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>)
+
+class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>, private val listener: OnListInteractionListener?)
     : RecyclerView.Adapter<PopularShowsRecyclerViewAdapter.ShowViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,14 +26,14 @@ class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>)
      * This inner class lets us refer to all the different View elements
      * (Yes, the same ones as in the XML layout files!)
      */
-    inner class ShowViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        var mItem: PopularShow? = null
-        val mShowTitle: TextView = mView.findViewById<View>(id.show_title) as TextView
-        val mShowDescription: TextView = mView.findViewById<View>(id.show_description) as TextView
-        val mShowImage: ImageView = mView.findViewById<View>(id.show_image) as ImageView
+    inner class ShowViewHolder(val sView: View) : RecyclerView.ViewHolder(sView) {
+        var sItem: PopularShow? = null
+        val sTitle: TextView = sView.findViewById<View>(id.show_title) as TextView
+        val sDescription: TextView = sView.findViewById<View>(id.show_description) as TextView
+        val sImage: ImageView = sView.findViewById<View>(id.show_image) as ImageView
 
         override fun toString(): String {
-            return mShowTitle.toString()
+            return sTitle.toString()
         }
     }
 
@@ -41,22 +43,26 @@ class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>)
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
         val show = shows[position]
 
-        holder.mItem = show
-        holder.mShowTitle.text = show.title
+        holder.sItem = show
+        holder.sTitle.text = show.title
 
         // Check if the description is empty
         if (show.description.isNullOrEmpty()) {
-            holder.mShowDescription.text = "This show does not have an overview translated in English."
+            holder.sDescription.text = "This show does not have an overview translated in English."
         } else {
-            holder.mShowDescription.text = show.description
+            holder.sDescription.text = show.description
         }
 
         val fullImageUrl = "https://image.tmdb.org/t/p/w500/" + show.showImageUrl
 
-        Glide.with(holder.mView)
+        Glide.with(holder.sView)
             .load(fullImageUrl)
             .centerInside()
-            .into(holder.mShowImage)
+            .into(holder.sImage)
+
+        holder.itemView.setOnClickListener {
+            holder.sItem?.let { show -> listener?.onItemClick(show) }
+        }
     }
 
     /**
@@ -65,4 +71,5 @@ class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>)
     override fun getItemCount(): Int {
         return shows.size
     }
+
 }

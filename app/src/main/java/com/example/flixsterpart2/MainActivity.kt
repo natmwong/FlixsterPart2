@@ -6,7 +6,7 @@ import com.example.flixsterpart2.R.id
 
 /**
  * The MainActivity for the FlixsterPart2 app.
- * Launches a [PopularShowsFragment].
+ * Launches a [PopularShowFragment].
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
