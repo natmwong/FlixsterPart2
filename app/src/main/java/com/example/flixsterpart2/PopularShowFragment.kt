@@ -24,13 +24,11 @@ import org.json.JSONArray
 // --------------------------------//
 private const val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
-const val SHOW_EXTRA = "SHOW_EXTRA"
-
 /*
  * The class for the only fragment in the app, which contains the progress bar,
  * recyclerView, and performs the network calls to the Movie Database API.
  */
-class PopularShowsFragment : Fragment(), OnListInteractionListener {
+class PopularShowFragment : Fragment(), OnListInteractionListener {
 
     /*
      * Constructing the view
@@ -43,7 +41,7 @@ class PopularShowsFragment : Fragment(), OnListInteractionListener {
         val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
         val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
         val context = view.context
-        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         updateAdapter(progressBar, recyclerView)
         return view
     }
@@ -81,16 +79,16 @@ class PopularShowsFragment : Fragment(), OnListInteractionListener {
 
                         //Parse JSON into Models
                         val resultsJSON : JSONArray = json.jsonObject.getJSONArray("results")
-                        val showsRawJSON : String = resultsJSON.toString()
                         val gson = Gson()
-                        val arrayShowType = object : TypeToken<List<PopularShow>>() {}.type
+                        val showListType = object : TypeToken<List<PopularShow>>() {}.type
 
 
-                        val models : List<PopularShow> = gson.fromJson(showsRawJSON, arrayShowType)
-                        recyclerView.adapter = PopularShowsRecyclerViewAdapter(models, this@PopularShowsFragment)
+                        val shows : List<PopularShow> = gson.fromJson(resultsJSON.toString(), showListType)
+                        Log.d("PopularShows", shows.toString())
+                        recyclerView.adapter = PopularShowsRecyclerViewAdapter(shows, this@PopularShowFragment)
 
                         // Look for this in Logcat:
-                        Log.d("PopularShowsFragment", "response successful")
+                        Log.d("PopularShowFragment", "response successful")
                     }
 
                     /*
@@ -108,18 +106,21 @@ class PopularShowsFragment : Fragment(), OnListInteractionListener {
 
                         // If the error is not null, log it!
                         t?.message?.let {
-                            Log.e("PopularShowsFragment", errorResponse)
+                            Log.e("PopularShowFragment", errorResponse)
                         }
                     }
                 }]
     }
 
     override fun onItemClick(item: PopularShow) {
-        Log.d("PopularShowsFragment", "originCountry: ${item.origin}")
+        Log.d("PopularShowFragment", "originCountry: ${item.origin?.toString()}")
 
-        // Navigate to Details screen and pass selected article
+        // Navigate to Details screen and pass extra show data
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra(SHOW_EXTRA, item)
+        intent.putExtra("description", item.description?.toString())
+        intent.putExtra("origin", item.origin?.toString())
+        intent.putExtra("airDate", item.airDate)
+        intent.putExtra("showImageUrl", item.showImageUrl)
         context?.startActivity(intent)
     }
 }

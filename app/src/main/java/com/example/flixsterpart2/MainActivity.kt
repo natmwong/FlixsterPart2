@@ -6,7 +6,7 @@ import com.example.flixsterpart2.R.id
 
 /**
  * The MainActivity for the FlixsterPart2 app.
- * Launches a [PopularShowFragment].
+ * Launches a [PopularShow].
  */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val supportFragmentManager = supportFragmentManager
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.content, PopularShowsFragment(), null).commit()
+        fragmentTransaction.replace(id.content, PopularShowFragment(), null).commit()
     }
 }

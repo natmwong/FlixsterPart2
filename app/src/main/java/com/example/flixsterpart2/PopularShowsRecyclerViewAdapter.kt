@@ -1,6 +1,6 @@
 package com.example.flixsterpart2
 
-import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +29,6 @@ class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>, pri
     inner class ShowViewHolder(val sView: View) : RecyclerView.ViewHolder(sView) {
         var sItem: PopularShow? = null
         val sTitle: TextView = sView.findViewById<View>(id.show_title) as TextView
-        val sDescription: TextView = sView.findViewById<View>(id.show_description) as TextView
         val sImage: ImageView = sView.findViewById<View>(id.show_image) as ImageView
 
         override fun toString(): String {
@@ -42,16 +41,10 @@ class PopularShowsRecyclerViewAdapter (private val shows: List<PopularShow>, pri
      */
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
         val show = shows[position]
+        Log.d("ShowTitle", "Title: ${show.title}")
 
         holder.sItem = show
         holder.sTitle.text = show.title
-
-        // Check if the description is empty
-        if (show.description.isNullOrEmpty()) {
-            holder.sDescription.text = "This show does not have an overview translated in English."
-        } else {
-            holder.sDescription.text = show.description
-        }
 
         val fullImageUrl = "https://image.tmdb.org/t/p/w500/" + show.showImageUrl
 

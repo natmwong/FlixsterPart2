@@ -1,36 +1,27 @@
 package com.example.flixsterpart2
 
-import android.support.annotation.Keep
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
 /**
  * The Model for storing a single show from the Movie Database API
  *
- * SerializedName tags MUST match the JSON response for the
+ * SerialName tags MUST match the JSON response for the
  * object to correctly parse with the gson library.
  */
 
-@Keep
-@Serializable
-data class PopularShow(
+class PopularShow{
+    @SerializedName("name")
+    val title: String? = null
 
-    @SerialName("name")
-    val title: String? = null,
+    @SerializedName("poster_path")
+    val showImageUrl: String? = null
 
-    @SerialName("poster_path")
-    val showImageUrl: String? = null,
+    @SerializedName("overview")
+    val description: String? = null
 
-    @SerialName("overview")
-    val description: String? = null,
+    @SerializedName("first_air_date")
+    val airDate: String? = null
 
-    @SerialName("first_air_date")
-    val airDate: String? = null,
-
-    @SerialName("origin_country")
-    val origin: String? = null,
-
-    @SerialName("vote_average")
-    val rating: String? = null,
-
-): java.io.Serializable
+    @SerializedName("origin_country")
+    val origin: List<String>? = null
+}

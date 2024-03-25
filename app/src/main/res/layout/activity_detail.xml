@@ -10,23 +10,24 @@
     <ImageView
         android:id="@+id/mediaImage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/mediaRating"
+        android:id="@+id/mediaAirDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:text="Rating"
+        android:text="Air Date"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         android:textColor="#000000"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mediaImage" />
@@ -42,18 +43,20 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#000000"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mediaRating" />
+        app:layout_constraintTop_toBottomOf="@+id/mediaAirDate" />
 
     <TextView
-        android:id="@+id/mediaAirDate"
+        android:id="@+id/mediaDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:text="Air Date"
+        android:text="Description"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
